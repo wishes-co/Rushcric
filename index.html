@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RUSH CRIC 🏏</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    background:#000;
+    color:#fff;
+    font-family:Arial,sans-serif
+}
+.app{
+    max-width:520px;
+    min-height:100vh;
+    margin:auto;
+    background:#080808
+}
+header{
+    padding:18px;
+    text-align:center;
+    border-bottom:1px solid #252525
+}
+.logo{
+    font-size:30px;
+    font-weight:900;
+    letter-spacing:3px
+}
+.sub{
+    color:#777;
+    font-size:11px;
+    letter-spacing:2px
+}
+.screen{
+    padding:20px 16px;
+    min-height:calc(100vh - 75px)
+}
+.hidden{display:none}
+h1{text-align:center}
+.card{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:18px;
+    padding:20px;
+    margin:14px 0
+}
+input,select{
+    width:100%;
+    padding:16px;
+    background:#171717;
+    color:white;
+    border:1px solid #444;
+    border-radius:12px;
+    font-size:17px;
+    margin:8px 0
+}
+button{
+    border:0;
+    border-radius:13px;
+    padding:16px;
+    font-weight:900;
+    font-size:16px
+}
+.primary{
+    width:100%;
+    background:#fff;
+    color:#000;
+    margin-top:10px
+}
+.menu{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:20px
+}
+.menu button{
+    min-height:100px;
+    background:#151515;
+    border:1px solid #333;
+    color:#fff;
+    font-size:17px
+}
+.menu button:active{transform:scale(.97)}
+.back{
+    background:#171717;
+    color:#fff;
+    border:1px solid #333;
+    width:100%;
+    margin-top:15px
+}
+.profile{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#111;
+    border:1px solid #292929;
+    padding:15px;
+    border-radius:14px
+}
+.online{
+    color:#45e06f;
+    font-size:12px
+}
+.player{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 5px;
+    border-bottom:1px solid #242424
+}
+.stat{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px
+}
+.stat div{
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:13px;
+    padding:16px;
+    text-align:center
+}
+.big{
+    font-size:27px;
+    font-weight:900
+}
+.center{text-align:center}
+.muted{color:#888}
+.record{
+    padding:13px 4px;
+    border-bottom:1px solid #252525
+}
+.badge{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:7px;
+    font-size:11px;
+    background:#222
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+    <div class="logo">RUSH CRIC 🏏</div>
+    <div class="sub">ONLINE CRICKET</div>
+</header>
+
+
+<!-- LOGIN -->
+
+<section id="login" class="screen">
+
+    <div class="center">
+        <div style="font-size:70px">🏏</div>
+        <h1>Welcome to RUSH CRIC</h1>
+        <p class="muted">
+            Enter your username to join the game.
+        </p>
+    </div>
+
+    <div class="card">
+
+        <input
+            id="username"
+            type="text"
+            maxlength="20"
+            placeholder="Enter username"
+        >
+
+        <select id="country">
+            <option>🇮🇳 India</option>
+            <option>🇵🇰 Pakistan</option>
+            <option>🇧🇩 Bangladesh</option>
+            <option>🇱🇰 Sri Lanka</option>
+            <option>🇳🇵 Nepal</option>
+            <option>🇦🇫 Afghanistan</option>
+            <option>🏴 England</option>
+            <option>🇦🇺 Australia</option>
+            <option>🇿🇦 South Africa</option>
+            <option>🇳🇿 New Zealand</option>
+            <option>🇺🇸 United States</option>
+        </select>
+
+        <button class="primary" onclick="login()">
+            ENTER RUSH CRIC →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- HOME -->
+
+<section id="home" class="screen hidden">
+
+    <div class="profile">
+        <div>
+            <b id="homeUsername">Player</b>
+            <div id="homeCountry" class="muted"></div>
+        </div>
+
+        <div class="online">● ONLINE</div>
+    </div>
+
+
+    <h2 class="center">RUSH CRIC</h2>
+
+    <div class="menu">
+
+        <button onclick="openScreen('team')">
+            👥<br>TEAM MODE
+        </button>
+
+        <button onclick="openScreen('players')">
+            🟢<br>ONLINE PLAYERS
+        </button>
+
+        <button onclick="openScreen('tournament')">
+            🏆<br>TOURNAMENT
+        </button>
+
+        <button onclick="openScreen('records')">
+            📊<br>RECORDS
+        </button>
+
+        <button onclick="openScreen('matches')">
+            📜<br>MATCH RECORDS
+        </button>
+
+        <button onclick="openScreen('profile')">
+            👤<br>MY PROFILE
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- TEAM MODE -->
+
+<section id="team" class="screen hidden">
+
+    <h1>👥 TEAM MODE</h1>
+
+    <div class="card">
+
+        <h2>Create Team</h2>
+
+        <input
+            id="teamName"
+            placeholder="Team name"
+            maxlength="25"
+        >
+
+        <button class="primary" onclick="createTeam()">
+            CREATE TEAM
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Join Team</h2>
+
+        <input
+            id="teamCode"
+            placeholder="Enter team code"
+        >
+
+        <button class="primary" onclick="joinTeam()">
+            JOIN TEAM
+        </button>
+
+    </div>
+
+    <div id="teamInfo" class="card hidden"></div>
+
+    <button class="back" onclick="openScreen('home')">
+        ← BACK
+    </button>
+
+</section>
+
+
+<!-- ONLINE PLAYERS -->
+
+<section id="players" class="screen hidden">
+
+    <h1>🟢 ONLINE PLAYERS</h1>
+
+    <div class="card">
+
+        <div class="player">
+            <span>🇮🇳 CricketFan</span>
+            <span class="online">● Online</span>
+        </div>
+
+        <div class="player">
+            <span>🇵🇰 KingBabar</span>
+            <span class="online">● Online</span>
+        </div>
+
+        <div class="player">
+            <span>🇧🇩 Tiger11</span>
+            <span class="online">● Online</span>
+        </div>
+
+        <div class="player">
+            <span>🇦🇺 AussieStar</span>
+            <span class="online">● Online</span>
+        </div>
+
+        <div class="player">
+            <span id="currentPlayer"></span>
+            <span class="online">● Online</span>
+        </div>
+
+    </div>
+
+    <p class="muted center">
+        Live multiplayer requires a connected server.
+    </p>
+
+    <button class="back" onclick="openScreen('home')">
+        ← BACK
+    </button>
+
+</section>
+
+
+<!-- TOURNAMENT -->
+
+<section id="tournament" class="screen hidden">
+
+    <h1>🏆 TOURNAMENT MODE</h1>
+
+    <div class="card">
+
+        <h2>Create Tournament</h2>
+
+        <input
+            id="tournamentName"
+            placeholder="Tournament name"
+        >
+
+        <select id="format">
+            <option>Knockout</option>
+            <option>League</option>
+        </select>
+
+        <button class="primary" onclick="createTournament()">
+            CREATE TOURNAMENT
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Upcoming</h2>
+
+        <div class="record">
+            🏆 RUSH CUP
+            <br>
+            <span class="muted">
+                Knockout • 8 Teams
+            </span>
+        </div>
+
+        <div class="record">
+            🏆 CRICKET CHAMPIONSHIP
+            <br>
+            <span class="muted">
+                League • 10 Teams
+            </span>
+        </div>
+
+    </div>
+
+    <button class="back" onclick="openScreen('home')">
+        ← BACK
+    </button>
+
+</section>
+
+
+<!-- RECORDS -->
+
+<section id="records" class="screen hidden">
+
+    <h1>📊 TOURNAMENT RECORDS</h1>
+
+    <div class="stat">
+
+        <div>
+            <div class="big" id="matchesPlayed">0</div>
+            Matches
+        </div>
+
+        <div>
+            <div class="big" id="wins">0</div>
+            Wins
+        </div>
+
+        <div>
+            <div class="big" id="losses">0</div>
+            Losses
+        </div>
+
+        <div>
+            <div class="big" id="titles">0</div>
+            Titles
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="record">
+            🏏 Highest Score:
+            <b id="highestScore">0</b>
+        </div>
+
+        <div class="record">
+            🎯 Best Bowling:
+            <b id="bestBowling">0 wickets</b>
+        </div>
+
+        <div class="record">
+            📈 Win Rate:
+            <b id="winRate">0%</b>
+        </div>
+
+    </div>
+
+    <button class="back" onclick="openScreen('home')">
+        ← BACK
+    </button>
+
+</section>
+
+
+<!-- MATCH RECORDS -->
+
+<section id="matches" class="screen hidden">
+
+    <h1>📜 MATCH RECORDS</h1>
+
+    <div id="matchList" class="card">
+
+        <div class="center muted">
+            No matches played yet.
+        </div>
+
+    </div>
+
+    <button class="back" onclick="openScreen('home')">
+        ← BACK
+    </button>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="screen hidden">
+
+    <h1>👤 MY PROFILE</h1>
+
+    <div class="card center">
+
+        <div style="font-size:65px">🏏</div>
+
+        <h2 id="profileUsername">Player</h2>
+
+        <p id="profileCountry" class="muted"></p>
+
+        <div class="online">● ONLINE</div>
+
+    </div>
+
+    <button class="primary" onclick="logout()">
+        LOG OUT
+    </button>
+
+    <button class="back" onclick="openScreen('home')">
+        ← BACK
+    </button>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =========================
+   PLAYER DATA
+========================= */
+
+let player = {
+    username:"",
+    country:"",
+    matches:0,
+    wins:0,
+    losses:0,
+    titles:0,
+    highestScore:0,
+    bestBowling:0
+};
+
+
+/* =========================
+   LOAD DATA
+========================= */
+
+function loadPlayer(){
+
+    const saved =
+        localStorage.getItem("rushCricPlayer");
+
+    if(saved){
+
+        player = JSON.parse(saved);
+
+        showPlayer();
+
+        openScreen("home");
+    }
+}
+
+
+/* =========================
+   SAVE DATA
+========================= */
+
+function savePlayer(){
+
+    localStorage.setItem(
+        "rushCricPlayer",
+        JSON.stringify(player)
+    );
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+    const username =
+        document.getElementById("username")
+        .value.trim();
+
+    const country =
+        document.getElementById("country")
+        .value;
+
+    if(!username){
+
+        alert("Please enter a username.");
+
+        return;
+    }
+
+    player.username = username;
+    player.country = country;
+
+    savePlayer();
+
+    showPlayer();
+
+    openScreen("home");
+}
+
+
+/* =========================
+   SHOW PLAYER
+========================= */
+
+function showPlayer(){
+
+    document.getElementById("homeUsername")
+        .textContent = player.username;
+
+    document.getElementById("homeCountry")
+        .textContent = player.country;
+
+    document.getElementById("currentPlayer")
+        .textContent =
+        "🟢 " + player.username;
+
+    document.getElementById("profileUsername")
+        .textContent = player.username;
+
+    document.getElementById("profileCountry")
+        .textContent = player.country;
+
+    updateRecords();
+}
+
+
+/* =========================
+   SCREEN NAVIGATION
+========================= */
+
+function openScreen(id){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen =>
+            screen.classList.add("hidden")
+        );
+
+    document
+        .getElementById(id)
+        .classList.remove("hidden");
+
+    if(id === "records"){
+        updateRecords();
+    }
+
+    if(id === "matches"){
+        loadMatches();
+    }
+}
+
+
+/* =========================
+   TEAM
+========================= */
+
+function createTeam(){
+
+    const name =
+        document.getElementById("teamName")
+        .value.trim();
+
+    if(!name){
+
+        alert("Enter a team name.");
+
+        return;
+    }
+
+    const code =
+        Math.random()
+        .toString(36)
+        .substring(2,8)
+        .toUpperCase();
+
+    const box =
+        document.getElementById("teamInfo");
+
+    box.classList.remove("hidden");
+
+    box.innerHTML = `
+        <h2>🏏 ${name}</h2>
+        <p>Team created successfully.</p>
+        <p>Team Code:</p>
+        <h2>${code}</h2>
+        <p class="muted">
+        Share this code with your teammates.
+        </p>
+    `;
+}
+
+
+function joinTeam(){
+
+    const code =
+        document.getElementById("teamCode")
+        .value.trim();
+
+    if(!code){
+
+        alert("Enter a team code.");
+
+        return;
+    }
+
+    alert(
+        "Team join request created: " + code
+    );
+}
+
+
+/* =========================
+   TOURNAMENT
+========================= */
+
+function createTournament(){
+
+    const name =
+        document.getElementById("tournamentName")
+        .value.trim();
+
+    const format =
+        document.getElementById("format")
+        .value;
+
+    if(!name){
+
+        alert("Enter a tournament name.");
+
+        return;
+    }
+
+    alert(
+        `Tournament "${name}" created!\nFormat: ${format}`
+    );
+}
+
+
+/* =========================
+   RECORDS
+========================= */
+
+function updateRecords(){
+
+    document.getElementById("matchesPlayed")
+        .textContent = player.matches;
+
+    document.getElementById("wins")
+        .textContent = player.wins;
+
+    document.getElementById("losses")
+        .textContent = player.losses;
+
+    document.getElementById("titles")
+        .textContent = player.titles;
+
+    document.getElementById("highestScore")
+        .textContent = player.highestScore;
+
+    document.getElementById("bestBowling")
+        .textContent =
+        player.bestBowling + " wickets";
+
+    const rate =
+        player.matches === 0
+        ? 0
+        : Math.round(
+            player.wins /
+            player.matches *
+            100
+        );
+
+    document.getElementById("winRate")
+        .textContent = rate + "%";
+}
+
+
+/* =========================
+   MATCH RECORDS
+========================= */
+
+function loadMatches(){
+
+    const records =
+        JSON.parse(
+            localStorage.getItem(
+                "rushCricMatches"
+            ) || "[]"
+        );
+
+    const list =
+        document.getElementById("matchList");
+
+    if(records.length === 0){
+
+        list.innerHTML =
+            `<div class="center muted">
+                No matches played yet.
+             </div>`;
+
+        return;
+    }
+
+    list.innerHTML = "";
+
+    records.forEach(match => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "record";
+
+        div.innerHTML = `
+            <b>${match.result}</b><br>
+            ${match.score}<br>
+            <span class="muted">
+                ${match.date}
+            </span>
+        `;
+
+        list.appendChild(div);
+
+    });
+}
+
+
+/* =========================
+   ADD MATCH RECORD
+========================= */
+
+function addMatchRecord(
+    result,
+    score
+){
+
+    const records =
+        JSON.parse(
+            localStorage.getItem(
+                "rushCricMatches"
+            ) || "[]"
+        );
+
+    records.unshift({
+
+        result:result,
+
+        score:score,
+
+        date:new Date()
+            .toLocaleString()
+
+    });
+
+    localStorage.setItem(
+        "rushCricMatches",
+        JSON.stringify(records)
+    );
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout(){
+
+    localStorage.removeItem(
+        "rushCricPlayer"
+    );
+
+    player = {
+
+        username:"",
+        country:"",
+        matches:0,
+        wins:0,
+        losses:0,
+        titles:0,
+        highestScore:0,
+        bestBowling:0
+
+    };
+
+    document.getElementById("username")
+        .value = "";
+
+    openScreen("login");
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadPlayer();
+
+</script>
+
+</body>
+  </html>
